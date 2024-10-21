@@ -1,49 +1,78 @@
 {
-    "name": "orchestra/tenanti",
-    "description": "Tenant based Database Schema Manager for Laravel",
-    "keywords": ["laravel", "orchestral", "orchestra-platform", "multi-tenant", "schema", "migration"],
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Mior Muhammad Zaki",
-            "email": "crynobone@gmail.com",
-            "homepage": "https://github.com/crynobone"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "Orchestra\\Tenanti\\": "src/"
-        }
+  "name": "orchestra/tenanti",
+  "description": "Tenant based Database Schema Manager for Laravel",
+  "keywords": [
+    "laravel",
+    "orchestral",
+    "orchestra-platform",
+    "multi-tenant",
+    "schema",
+    "migration"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Mior Muhammad Zaki",
+      "email": "crynobone@gmail.com",
+      "homepage": "https://github.com/crynobone"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Orchestra\\Tenanti\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Orchestra\\Tenanti\\Tests\\": "tests/"
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Orchestra\\Tenanti\\Tests\\": "tests/"
-        },
-        "classmap": [
-            "tests/Kernel.php"
-        ]
+    "classmap": [
+      "tests/Kernel.php"
+    ]
+  },
+  "require": {
+    "php": "^8.0",
+    "illuminate/console": "^9.0",
+    "illuminate/filesystem": "^9.0",
+    "illuminate/support": "^9.0",
+    "orchestra/model": "7.x-dev",
+    "orchestra/support": "7.x-dev"
+  },
+  "require-dev": {
+    "laravel/tinker": "^2.7",
+    "nunomaduro/larastan": "^2.0",
+    "orchestra/canvas": "^7.0",
+    "orchestra/testbench": "^7.0"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "7.0-dev"
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/katsana-external/model"
     },
-    "require": {
-        "php": "^7.3 || ^8.0",
-        "illuminate/console": "^8.40",
-        "illuminate/filesystem": "^8.40",
-        "illuminate/support": "^8.40",
-        "orchestra/model": "^6.0",
-        "orchestra/support": "^6.1"
+    {
+      "type": "vcs",
+      "url": "https://github.com/katsana-external/support"
     },
-    "require-dev": {
-        "laravel/tinker": "^2.5",
-        "nunomaduro/larastan": "^0.7.12",
-        "orchestra/canvas": "^6.1",
-        "orchestra/testbench": "^6.22"
+    {
+      "type": "vcs",
+      "url": "https://github.com/katsana-external/dhosa"
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "6.0-dev"
-        }
+    {
+      "type": "vcs",
+      "url": "https://github.com/katsana-external/database"
     },
-    "config": {
-        "sort-packages": true
-    },
-    "minimum-stability": "dev"
+    {
+      "type": "vcs",
+      "url": "https://github.com/katsana-external/query-filter"
+    }
+  ]
 }
