@@ -31,7 +31,7 @@ class TenantiServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     protected function registerConfigurationForManager(TenantiManager $manager): void
     {
-        $namespace = $this->hasPackageRepository() ? 'orchestra/tenanti::' : 'orchestra.tenanti';
+        $namespace = 'orchestra.tenanti';
 
         $this->app->booted(static function ($app) use ($manager, $namespace) {
             $manager->setConfiguration($app->make('config')->get($namespace));
@@ -45,14 +45,13 @@ class TenantiServiceProvider extends ServiceProvider implements DeferrableProvid
      */
     public function boot()
     {
-        $path = \realpath(__DIR__.'/../');
+        $path = \realpath(__DIR__ . '/../');
 
         $this->mergeConfigFrom("{$path}/config/config.php", 'orchestra.tenanti');
 
         $this->publishes([
-           "{$path}/config/config.php" => config_path('orchestra/tenanti.php'),
-       ], ['orchestra-tenanti', 'laravel-config']);
-
+            "{$path}/config/config.php" => config_path('orchestra/tenanti.php'),
+        ], ['orchestra-tenanti', 'laravel-config']);
     }
 
     /**
