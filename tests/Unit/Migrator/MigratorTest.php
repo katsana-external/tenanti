@@ -59,7 +59,7 @@ class MigratorTest extends TestCase
         $batch = 5;
         $pretend = false;
 
-        $stub = m::mock('Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,note]', [$repository, $resolver, $files])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,write]', [$repository, $resolver, $files])
                     ->makePartial()
                     ->shouldAllowMockingProtectedMethods();
 
@@ -68,7 +68,7 @@ class MigratorTest extends TestCase
 
         $stub->shouldReceive('getMigrationName')->once()->with($file)->andReturn($file)
             ->shouldReceive('resolve')->once()->with($file)->andReturn($migration)
-            ->shouldReceive('note')->once()->with("<info>Migrated [foobar:10]:</info> $file")->andReturnNull();
+            ->shouldReceive('write')->once()->with("<info>Migrated [foobar:10]:</info> $file")->andReturnNull();
         $model->shouldReceive('getKey')->once()->andReturn(10)
             ->shouldReceive('getTable')->once()->andReturn('foobar');
         $migration->shouldReceive('up')->once()->with(10, $model)->andReturnNull();
@@ -117,7 +117,7 @@ class MigratorTest extends TestCase
         $pretend = false;
         $migration = new Fluent(['migration' => $file]);
 
-        $stub = m::mock('Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,note]', [$repository, $resolver, $files])
+        $stub = m::mock('Orchestra\Tenanti\Migrator\Migrator[getMigrationName,resolve,write]', [$repository, $resolver, $files])
             ->makePartial()
             ->shouldAllowMockingProtectedMethods();
 
@@ -126,7 +126,7 @@ class MigratorTest extends TestCase
 
         $stub->shouldReceive('getMigrationName')->once()->with($file)->andReturn($file)
             ->shouldReceive('resolve')->once()->with($file)->andReturn($instance)
-            ->shouldReceive('note')->once()->with("<info>Rolled back [foobar:10]:</info> $file")->andReturnNull();
+            ->shouldReceive('write')->once()->with("<info>Rolled back [foobar:10]:</info> $file")->andReturnNull();
         $model->shouldReceive('getKey')->once()->andReturn(10)
             ->shouldReceive('getTable')->once()->andReturn('foobar');
         $instance->shouldReceive('down')->once()->with(10, $model)->andReturnNull();

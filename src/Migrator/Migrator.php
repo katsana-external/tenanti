@@ -142,7 +142,7 @@ class Migrator extends BaseMigrator
         // in the application. A migration repository keeps the migrate order.
         $this->repository->log($file, $batch);
 
-        $this->note("<info>Migrated [{$this->entity->getTable()}:{$key}]:</info> {$file}");
+        $this->write("<info>Migrated [{$this->entity->getTable()}:{$key}]:</info> {$file}");
     }
 
     /**
@@ -176,7 +176,7 @@ class Migrator extends BaseMigrator
         // by the application then will be able to fire by any later operation.
         $this->repository->delete($migration);
 
-        $this->note("<info>Rolled back [{$this->entity->getTable()}:{$key}]:</info> {$file}");
+        $this->write("<info>Rolled back [{$this->entity->getTable()}:{$key}]:</info> {$file}");
     }
 
     /**
@@ -195,7 +195,7 @@ class Migrator extends BaseMigrator
         foreach ($this->getQueries($migration, $method) as $query) {
             $name = \get_class($migration);
 
-            $this->note("<info>{$name} [{$table}:{$key}]:</info> {$query['query']}");
+            $this->write("<info>{$name} [{$table}:{$key}]:</info> {$query['query']}");
         }
     }
 
