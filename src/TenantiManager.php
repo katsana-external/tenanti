@@ -2,10 +2,8 @@
 
 namespace Orchestra\Tenanti;
 
-use Closure;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Manager;
-use InvalidArgumentException;
 use Orchestra\Tenanti\Migrator\Factory;
 
 class TenantiManager extends Manager
@@ -27,14 +25,14 @@ class TenantiManager extends Manager
     /**
      * Create a new driver instance.
      *
-     * @param  string  $driver
+     * @param string $driver
      *
      * @throws \InvalidArgumentException
      */
     protected function createDriver($driver): Contracts\Factory
     {
         if (\is_null($this->setupDriverConfig($driver))) {
-            throw new InvalidArgumentException("Driver [$driver] not supported.");
+            throw new \InvalidArgumentException("Driver [$driver] not supported.");
         }
 
         return new $this->resolver($this->container, $this, $driver);
@@ -47,7 +45,7 @@ class TenantiManager extends Manager
      */
     public function getDefaultDriver()
     {
-        throw new InvalidArgumentException('Default driver not implemented.');
+        throw new \InvalidArgumentException('Default driver not implemented.');
     }
 
     /**
@@ -72,12 +70,8 @@ class TenantiManager extends Manager
 
     /**
      * Get configuration values.
-     *
-     * @param  mixed  $default
-     *
-     * @return mixed
      */
-    public function config(?string $group = null, $default = null)
+    public function config(string $group = null, $default = null)
     {
         return Arr::get($this->configurations, $group, $default);
     }
@@ -87,7 +81,7 @@ class TenantiManager extends Manager
      *
      * @throws \InvalidArgumentException
      */
-    public function connection(?string $using, Closure $callback, array $options = []): void
+    public function connection(?string $using, \Closure $callback, array $options = []): void
     {
         if (\is_null($using)) {
             $using = $this->config->get('database.default');
@@ -96,7 +90,7 @@ class TenantiManager extends Manager
         $config = $this->config->get("database.connections.{$using}", null);
 
         if (\is_null($config)) {
-            throw new InvalidArgumentException("Database connection [{$using}] is not available.");
+            throw new \InvalidArgumentException("Database connection [{$using}] is not available.");
         }
 
         Arr::set($this->configurations, 'connection', [
@@ -134,7 +128,7 @@ class TenantiManager extends Manager
      */
     protected function driverExcludedByOptions(string $driver, array $options): bool
     {
-        return (! empty($options['only']) && ! \in_array($driver, (array) $options['only'])) ||
-            (! empty($options['except']) && \in_array($driver, (array) $options['except']));
+        return (! empty($options['only']) && ! \in_array($driver, (array) $options['only']))
+            || (! empty($options['except']) && \in_array($driver, (array) $options['except']));
     }
 }
