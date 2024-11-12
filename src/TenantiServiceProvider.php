@@ -47,23 +47,12 @@ class TenantiServiceProvider extends ServiceProvider implements DeferrableProvid
     {
         $path = \realpath(__DIR__.'/../');
 
-        $this->addConfigComponent('orchestra/tenanti', 'orchestra/tenanti', "{$path}/config");
-
-        if (! $this->hasPackageRepository()) {
-            $this->bootUsingLaravel($path);
-        }
-    }
-
-    /**
-     * Boot using Laravel setup.
-     */
-    protected function bootUsingLaravel(string $path): void
-    {
         $this->mergeConfigFrom("{$path}/config/config.php", 'orchestra.tenanti');
 
         $this->publishes([
-            "{$path}/config/config.php" => \config_path('orchestra/tenanti.php'),
-        ]);
+           "{$path}/config/config.php" => config_path('orchestra/tenanti.php'),
+       ], ['orchestra-tenanti', 'laravel-config']);
+
     }
 
     /**
