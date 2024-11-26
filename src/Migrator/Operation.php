@@ -178,7 +178,7 @@ trait Operation
             $database = $tenants['name'];
         }
 
-        if (\substr($database, -5) !== '_{id}' && $this->config('shared', true) === false) {
+        if (\substr((string) $database, -5) !== '_{id}' && $this->config('shared', true) === false) {
             $database .= '_{id}';
         }
 
